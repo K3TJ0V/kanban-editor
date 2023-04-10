@@ -1,4 +1,4 @@
 import "normalize.css";
 import "../scss/main.scss";
 
-console.log("dupa");
+console.log("test");
