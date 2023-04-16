@@ -6,6 +6,8 @@ const placeholder = document.querySelector('.placeholder')
 const hamburger = document.querySelector('.header__hamburger--js');
 const navBlock = document.querySelector('.header__nav--js');
 const add = document.querySelector('.main__add--js');
+const Creator = document.querySelector('.main__creator');
+const creatorClose = document.querySelector('.close--js');
 
 hamburger.addEventListener('click', ()=>{
     navBlock.classList.toggle('visible');
@@ -18,5 +20,9 @@ hamburger.addEventListener('click', ()=>{
 })
 
 add.addEventListener('click', ()=>{
-    console.log("dupa");
+    Creator.classList.toggle('visibleCreator');
+})
+
+creatorClose.addEventListener('click', ()=>{
+    Creator.classList.remove('visibleCreator');
 })
