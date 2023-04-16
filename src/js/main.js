@@ -5,6 +5,7 @@ const header = document.querySelector('.header');
 const placeholder = document.querySelector('.placeholder')
 const hamburger = document.querySelector('.header__hamburger--js');
 const navBlock = document.querySelector('.header__nav--js');
+const add = document.querySelector('.main__add--js');
 
 hamburger.addEventListener('click', ()=>{
     navBlock.classList.toggle('visible');
@@ -14,4 +15,8 @@ hamburger.addEventListener('click', ()=>{
         header.prepend(hamburger);
         navBlock.prepend(placeholder)
     }
+})
+
+add.addEventListener('click', ()=>{
+    console.log("dupa");
 })
