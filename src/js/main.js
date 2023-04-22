@@ -10,7 +10,7 @@ const Creator = document.querySelector('.main__creator');
 const creatorClose = document.querySelector('.close--js');
 const colInput = document.querySelector('.creator__input--js');
 const main = document.querySelector('.main');
-const colButton = document.querySelector('.creator__submit--js');
+const colSubmit = document.querySelector('.creator__submit--js');
 
 hamburger.addEventListener('click', ()=>{
     navBlock.classList.toggle('visible');
@@ -29,24 +29,34 @@ creatorClose.addEventListener('click', ()=>{
     Creator.classList.remove('visibleCreator');
 })
 
-colButton.addEventListener('click', ()=>{
+colSubmit.addEventListener('click', ()=>{
     // creating elements
+    const flexDiv = document.createElement('div')
     const newColumn = document.createElement('section');
     const colHeader = document.createElement('h3');
     const colList = document.createElement('button');
+    const taskArea = document.createElement('section');
     // creating text
     colList.innerText = ">";
     colHeader.innerText = colInput.value;
     //adding classes to new elements
     newColumn.classList.add('main__column');
-    colList.classList.add('main__column--button')
+    colList.classList.add('main__column--button');
+    taskArea.classList.add('main__column--task');
+    flexDiv.classList.add('test')
     // adding text to columns and columns to main
-    newColumn.appendChild(colHeader);
-    newColumn.appendChild(colList);
+
+    // adding flexDiv to position elements of column 
+    // above taskArea and just simplify it
+    flexDiv.appendChild(colHeader);
+    flexDiv.appendChild(colList);
+    newColumn.appendChild(flexDiv);
+    newColumn.appendChild(taskArea)
     main.appendChild(newColumn);
 
     //listener to new column buttons
     colList.addEventListener('click', ()=>{
-        
+        colList.classList.toggle('opened');
+        taskArea.classList.toggle('taskOpen');
     })
 });
