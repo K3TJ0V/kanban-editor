@@ -21,6 +21,7 @@ hamburger.addEventListener('click', ()=>{
         navBlock.prepend(placeholder)
     }
 })
+
 //listeners to open, close column creator 
 add.addEventListener('click', ()=>{
     Creator.classList.toggle('visibleCreator');
@@ -44,6 +45,7 @@ colSubmit.addEventListener('click', ()=>{
     colList.classList.add('main__column--button');
     taskArea.classList.add('main__column--task');
     flexDiv.classList.add('test')
+    colHeader.classList.add('test__header')
     // adding text to columns and columns to main
 
     // adding flexDiv to position elements of column 

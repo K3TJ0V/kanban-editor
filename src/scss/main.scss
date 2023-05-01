@@ -1,188 +1,219 @@
-html{
-    min-height: 100%;
+html {
+  min-height: 100%;
 }
-body{
-    background: hsla(190, 66%, 38%, 1);
+body {
+  background: hsla(190, 66%, 38%, 1);
 
-    background: linear-gradient(180deg, hsla(190, 66%, 38%, 1) 0%, hsla(191, 70%, 32%, 1) 0%, hsla(186, 68%, 38%, 1) 50%, hsla(182, 75%, 53%, 1) 100%);
-    
-    background: -moz-linear-gradient(180deg, hsla(190, 66%, 38%, 1) 0%, hsla(191, 70%, 32%, 1) 0%, hsla(186, 68%, 38%, 1) 50%, hsla(182, 75%, 53%, 1) 100%);
-    
-    background: -webkit-linear-gradient(180deg, hsla(190, 66%, 38%, 1) 0%, hsla(191, 70%, 32%, 1) 0%, hsla(186, 68%, 38%, 1) 50%, hsla(182, 75%, 53%, 1) 100%);
-    height: 100vh;
+  background: linear-gradient(
+    180deg,
+    hsla(190, 66%, 38%, 1) 0%,
+    hsla(191, 70%, 32%, 1) 0%,
+    hsla(186, 68%, 38%, 1) 50%,
+    hsla(182, 75%, 53%, 1) 100%
+  );
 
-    font-family: 'Roboto';
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
+  background: -moz-linear-gradient(
+    180deg,
+    hsla(190, 66%, 38%, 1) 0%,
+    hsla(191, 70%, 32%, 1) 0%,
+    hsla(186, 68%, 38%, 1) 50%,
+    hsla(182, 75%, 53%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    180deg,
+    hsla(190, 66%, 38%, 1) 0%,
+    hsla(191, 70%, 32%, 1) 0%,
+    hsla(186, 68%, 38%, 1) 50%,
+    hsla(182, 75%, 53%, 1) 100%
+  );
+  height: 100vh;
+
+  font-family: "Roboto";
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
 }
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
+  color: #fff;
+}
+.header {
+  color: #fff;
+  display: flex;
+  gap: 10px;
+  &__hamburger {
+    background: none;
+    border: none;
     color: #fff;
-}
-.header{
-    color: #fff;
-    display: flex;
-    gap: 10px;
-    &__hamburger{
-        background: none;
-        border: none;
-        color: #fff;
-    }
-    &__nav{
-        transform: translateX(-100%);
-        transition: 0.2s all;
-        position: absolute;
-        height: 100vh;
-        background-color: hsla(190, 66%, 38%, 1);
-        border-radius: 0 20px 20px 0px;
-        border: 1px solid black;
-        padding: 16px;
-        padding-top: 70px;
-        z-index: 2;
-    }
-}
-
-.nav{
-    &__settings{
-        align-items: center;
-        display: flex;
-        flex-flow: column;
-        gap: 5px;
-    }
-}
-
-nav > button{
+    cursor: pointer;
+  }
+  &__nav {
+    transform: translateX(-100%);
+    transition: 0.2s all;
     position: absolute;
-    top: 20px;
-    left: 0;
+    height: 100vh;
+    background-color: hsla(190, 66%, 38%, 1);
+    border-radius: 0 20px 20px 0px;
+    border: 1px solid black;
+    padding: 16px;
+    padding-top: 70px;
+    z-index: 2;
+  }
 }
-
-.taskOpen{
-    border-top: 1px solid black;
-    height: 300px !important;
-    transition: height 0.2s;
-}
-
-.main{
-    margin-top: 50px;
-    font-size: 28px;
-    display: flex;
-    justify-content: center;
+.nav {
+  &__settings {
     align-items: center;
-    flex-flow: column;
-    &__column{
-        box-sizing: border-box;
-        padding: 10px;
-        display: flex;
-        flex-flow: column;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #fff;
-        width: 80vw;
-        border: 1px black solid;
-        &--task{
-            height: 0;
-            width: 100%;
-            background-color: #fff;
-            transition: height 0.2s;
-        }
-        &--button{
-            width: 50px;
-            height: 50px;
-            border: none;
-            background-color: #fff;
-            transition: 0.2s all;
-        }
-    }
-    &__creator{
-        transform: scale(0);
-        position: absolute;
-        top: 15%;
-        background-color: hsla(190, 66%, 38%, 1);
-        border-radius: 16px;
-        color: #fff;
-        font-size: 20px;
-        text-align: center;
-        width: 80vw;
-        height: 50vh;
-        padding: 10px;
-        box-shadow: 0px 7px 61px 9px black;
-        display: flex;
-        flex-flow: column;
-        gap: 10px;
-        transition: 0.2s all;
-        z-index: 2;
-        &--input{
-            border-radius: 10px;
-            border: none;
-            padding: 5px;
-            margin-top: 20px;
-        }
-        &--submit{
-            border: none;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 5px;
-            width: 60px;
-            align-self: center;
-        }
-        &--flex{
-            display: flex;
-            flex-flow: column;
-        }
-        &--close{
-            align-self: flex-end;
-            color: #fff;
-            border: none;
-            background: none;
-        }
-        &--example{
-            opacity: 0.6;
-        }
-    }
-    &__add{
-        color: #fff; 
-        background: none;
-        border: none;
-        margin-top: 50px;
-        position: relative;
-        margin-bottom: 40px;
-    }
-    &__add::before{
-        position: absolute;
-        content: "+";
-        font-size: 60px;
-        width: 100%;
-        height: 50px;
-        top: -60px;
-        left: 0;
-    }
-}
-
-.visibleCreator{
-    transform: scale(1.0);
-}
-
-.visible{
-    transform: translateX(0);
-    width: 30%;
-}
-
-.placeholder{
-    display: block;
-    width: 42px;
-    height: 42px; 
-}
-
-.opened{
-    transform: rotate(90deg );
-    z-index: 1;
-}
-
-.test{
-    width: 100%;
     display: flex;
+    flex-flow: column;
+    gap: 5px;
+  }
+}
+
+nav > button {
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+
+main section:nth-child(3) {
+  border-radius: 16px 16px 0 0;
+}
+main .main__column:last-child {
+  border-radius: 0 0 16px 16px;
+  border: none;
+  box-shadow: inset 0px -8px hsla(190, 68%, 33%, 0.306);
+}
+.main {
+  margin-top: 50px;
+  font-size: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  &__column {
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-flow: column;
     justify-content: space-between;
     align-items: center;
+    background-color: #fff;
+    width: 90vw;
+    border-bottom: 1px black solid;
+    &--task {
+      height: 0;
+      width: 100%;
+      background-color: #fff;
+      transition: height 0.2s;
+    }
+    &--button {
+      width: 50px;
+      height: 50px;
+      border: none;
+      background-color: #fff;
+      transition: 0.2s all;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
+  &__creator {
+    transform: scale(0);
+    position: absolute;
+    top: 15%;
+    background-color: hsla(190, 66%, 38%, 1);
+    border-radius: 16px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    width: 80vw;
+    height: 50vh;
+    padding: 10px;
+    box-shadow: 0px 7px 61px 9px black;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    transition: 0.2s all;
+    z-index: 2;
+    &--input {
+      border-radius: 10px;
+      border: none;
+      padding: 5px;
+      margin-top: 20px;
+    }
+    &--submit {
+      border: none;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 5px;
+      width: 60px;
+      align-self: center;
+    }
+    &--flex {
+      display: flex;
+      flex-flow: column;
+    }
+    &--close {
+      align-self: flex-end;
+      color: #fff;
+      border: none;
+      background: none;
+    }
+    &--example {
+      opacity: 0.6;
+    }
+  }
+  &__add {
+    color: #fff;
+    background: none;
+    border: none;
+    margin-top: 50px;
+    position: relative;
+    margin-bottom: 40px;
+    cursor: pointer;
+  }
+  &__add::before {
+    position: absolute;
+    content: "+";
+    font-size: 60px;
+    width: 100%;
+    height: 50px;
+    top: -60px;
+    left: 0;
+  }
+}
+.taskOpen {
+  border-top: 1px solid black;
+  height: 300px !important;
+  transition: height 0.2s;
+}
+.visibleCreator {
+  transform: scale(1);
+}
+
+.visible {
+  transform: translateX(0);
+  width: 30%;
+}
+
+.placeholder {
+  display: block;
+  width: 42px;
+  height: 42px;
+}
+
+.opened {
+  transform: rotate(90deg);
+  z-index: 1;
+}
+
+.test {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__header{
+    inline-size: 88vw;
+    overflow: scroll;
+  }
 }
