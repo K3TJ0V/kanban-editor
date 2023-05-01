@@ -6,6 +6,7 @@ const placeholder = document.querySelector('.placeholder')
 const hamburger = document.querySelector('.header__hamburger--js');
 const navBlock = document.querySelector('.header__nav--js');
 const add = document.querySelector('.main__add--js');
+const clear = document.querySelector('.main__clear--js');
 const Creator = document.querySelector('.main__creator');
 const creatorClose = document.querySelector('.close--js');
 const colInput = document.querySelector('.creator__input--js');
@@ -61,4 +62,16 @@ colSubmit.addEventListener('click', ()=>{
         colList.classList.toggle('opened');
         taskArea.classList.toggle('taskOpen');
     })
+    if(main.childElementCount == 4){
+        clear.style.display = "block";
+    }
 });
+
+//clearing created columns(all at one click)
+clear.addEventListener('click', (e)=>{
+    const columns = document.querySelectorAll('.main__column');
+    columns.forEach((e)=>{
+        e.remove()
+    })
+    clear.style.display = "none"
+})
