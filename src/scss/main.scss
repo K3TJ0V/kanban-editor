@@ -106,6 +106,10 @@ main .main__column:last-child {
       width: 100%;
       background-color: #fff;
       transition: height 0.2s;
+      overflow: hidden;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
     }
     &--button {
       width: 50px;
