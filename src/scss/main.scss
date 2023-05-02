@@ -106,7 +106,7 @@ main .main__column:last-child {
       width: 100%;
       background-color: #fff;
       transition: height 0.2s;
-      overflow: hidden;
+      overflow: scroll;
       display: flex;
       flex-flow: column;
       align-items: center;
@@ -205,9 +205,40 @@ main .main__column:last-child {
     left: 0;
   }
 }
+.column__task{
+  background: none;
+  border: none;
+  margin-top: 40px;
+  position: relative;
+}
+.column__task::before{
+  content: "+";
+  font-size: 40px;
+  position: absolute;
+  top: -40px;
+  left: 0;
+  width: 100%;
+}
+
+
+.task{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  min-height: 200px;
+  background-color: rgb(184, 184, 184);
+  border-radius: 10px;
+  margin-top: 10px;
+  &__description{
+    height: 80%;
+    width: 100%;
+  }
+}
+
 .taskOpen {
   border-top: 1px solid black;
-  height: 300px !important;
+  height: 500px !important;
   transition: height 0.2s;
 }
 .visibleCreator {

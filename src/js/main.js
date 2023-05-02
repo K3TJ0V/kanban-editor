@@ -40,10 +40,17 @@ class column {
     this.taskArea = taskArea;
   }
 }
+class task{
+    constructor(newTask, taskDescription, moveButton, deleteButton, flexDiv){
+        this.newTask = newTask;
+        this.taskDescription = taskDescription;
+        this.moveButton = moveButton;
+        this.deleteButton = deleteButton;
+    }
+}
 
 function createColumn() {
   //Creating Column elements
-  /** @type {HTMLElement} */
   const newColumn = document.createElement("section");
   const flexDiv = document.createElement("div");
   const colHeader = document.createElement("h3");
@@ -59,9 +66,11 @@ function createColumn() {
   taskArea.appendChild(addTask);
 
   addTask.addEventListener("click", () => {
-    addTask1(taskArea);
-  });
+    newTask = addTask1();
+    taskArea.appendChild(newTask.newTask);
 
+  });
+  
   //listener to new column buttons
   colList.addEventListener("click", () => {
     colList.classList.toggle("opened");
@@ -73,9 +82,23 @@ function createColumn() {
   return Column;
 }
 
-/** @param {HTMLElement} column */
-function addTask1(column) {
-  console.log(column);
+function addTask1() {
+    const newTask = document.createElement('section');
+    const taskDescription = document.createElement('span');
+    const moveButton = document.createElement('button');
+    const deleteButton = document.createElement('button');
+    const flexDiv = document.createElement('div');
+    moveButton.innerText = "move"
+    deleteButton.innerText = "delete"
+    flexDiv.appendChild(moveButton);
+    flexDiv.appendChild(deleteButton);
+    flexDiv.classList.add('task__flex')
+    newTask.appendChild(taskDescription)
+    newTask.appendChild(flexDiv);
+
+    Task = new task(newTask, taskDescription, moveButton, deleteButton, flexDiv);
+    addTaskClasses(Task);
+    return Task;
 }
 
 colSubmit.addEventListener("click", () => {
@@ -89,11 +112,9 @@ colSubmit.addEventListener("click", () => {
   column1.newColumn.appendChild(column1.flexDiv);
   column1.newColumn.appendChild(column1.taskArea);
   main.appendChild(column1.newColumn);
-
   if (main.childElementCount == 4) {
     clear.style.display = "block";
   }
-
   //setting empty input after adding new column
   colInput.value = "";
 });
@@ -113,4 +134,10 @@ function addColumnClasses(column1) {
   column1.taskArea.classList.add("main__column--task");
   column1.flexDiv.classList.add("test");
   column1.colHeader.classList.add("test__header");
+}
+function addTaskClasses(task){
+    task.newTask.classList.add('task');
+    task.taskDescription.classList.add('task__description');
+    task.moveButton.classList.add('task__move');
+    task.deleteButton.classList.add('task__delete');
 }
