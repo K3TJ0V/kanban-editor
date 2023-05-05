@@ -12,6 +12,11 @@ const creatorClose = document.querySelector(".close--js");
 const colInput = document.querySelector(".creator__input--js");
 const main = document.querySelector(".main");
 const colSubmit = document.querySelector(".creator__submit--js");
+const textEditor = document.querySelector('.task__editor--text');
+
+const deleteIcon = document.querySelector('.deleteIcon');
+const moveIcon = document.querySelector('.moveIcon');
+const editIcon = document.querySelector('.editIcon');
 
 hamburger.addEventListener("click", () => {
   navBlock.classList.toggle("visible");
@@ -83,19 +88,45 @@ function createColumn() {
 }
 
 function addTask1() {
+    //Creating Column elements
     const newTask = document.createElement('section');
     const taskDescription = document.createElement('span');
     const moveButton = document.createElement('button');
     const deleteButton = document.createElement('button');
+    const editButton = document.createElement('button');
     const flexDiv = document.createElement('div');
-    moveButton.innerText = "move"
-    deleteButton.innerText = "delete"
+    //button values
+    editButton.innerHTML = editIcon.innerHTML;
+    moveButton.innerHTML = moveIcon.innerHTML;
+    deleteButton.innerHTML = deleteIcon.innerHTML;
+    //appending elements
+    editButton.classList.add('task__edit')
+    flexDiv.appendChild(editButton);
     flexDiv.appendChild(moveButton);
     flexDiv.appendChild(deleteButton);
     flexDiv.classList.add('task__flex')
     newTask.appendChild(taskDescription)
     newTask.appendChild(flexDiv);
-
+    //buttons listeners
+    deleteButton.addEventListener('click', (e)=>{
+      let root = e.currentTarget.parentElement.parentElement;
+      root.remove();
+    })
+    moveButton.addEventListener('click', ()=>{
+      placeholder;
+    })
+    editButton.addEventListener('click',()=>{
+      const taskEditor = document.querySelector('.task__editor');
+      taskEditor.classList.toggle('taskEditorOpened');
+      if(taskEditor.classList == "task__editor taskEditorOpened"){
+        taskEditor.append(editButton);
+      } else{
+        flexDiv.prepend(editButton);
+        taskDescription.innerHTML = textEditor.value;
+        textEditor.value = "";
+      }
+    })
+    
     Task = new task(newTask, taskDescription, moveButton, deleteButton, flexDiv);
     addTaskClasses(Task);
     return Task;
@@ -112,7 +143,7 @@ colSubmit.addEventListener("click", () => {
   column1.newColumn.appendChild(column1.flexDiv);
   column1.newColumn.appendChild(column1.taskArea);
   main.appendChild(column1.newColumn);
-  if (main.childElementCount == 4) {
+  if (main.childElementCount == 5) {
     clear.style.display = "block";
   }
   //setting empty input after adding new column
@@ -136,8 +167,8 @@ function addColumnClasses(column1) {
   column1.colHeader.classList.add("test__header");
 }
 function addTaskClasses(task){
-    task.newTask.classList.add('task');
-    task.taskDescription.classList.add('task__description');
-    task.moveButton.classList.add('task__move');
-    task.deleteButton.classList.add('task__delete');
+  task.newTask.classList.add('task');
+  task.taskDescription.classList.add('task__description');
+  task.moveButton.classList.add('task__move');
+  task.deleteButton.classList.add('task__delete');
 }

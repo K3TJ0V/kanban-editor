@@ -76,7 +76,7 @@ nav > button {
   left: 0;
 }
 
-main section:nth-child(4) {
+main section:nth-child(5) {
   border-radius: 16px 16px 0 0;
 }
 main .main__column:last-child {
@@ -121,7 +121,7 @@ main .main__column:last-child {
       cursor: pointer;
     }
   }
-  &__creator {
+  &__creator{
     transform: scale(0);
     position: absolute;
     top: 15%;
@@ -225,14 +225,53 @@ main .main__column:last-child {
   display: flex;
   flex-flow: column;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   min-height: 200px;
   background-color: rgb(184, 184, 184);
   border-radius: 10px;
   margin-top: 10px;
   &__description{
-    height: 80%;
-    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    max-height: 75%;
+    word-wrap: break-word;
+    max-width: 100%;
+    color: #fff;
+    overflow: auto;
+    padding: 10px;
+  }
+  &__move, &__delete, &__edit{
+    background: none;
+    border: none;
+    color: #fff;
+  }
+  &__editor{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transform: scale(0);
+    position: absolute;
+    top: 25%;
+    background-color: hsla(190, 66%, 38%, 1);
+    border-radius: 16px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    width: 80vw;
+    height: 30vh;
+    padding: 10px;
+    box-shadow: 0px 7px 61px 9px black;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    transition: 0.2s all;
+    z-index: 2;
+    &--text{
+      width: 95%;
+      border-radius: 16px;
+      padding: 5px;
+    }
   }
 }
 
@@ -240,6 +279,9 @@ main .main__column:last-child {
   border-top: 1px solid black;
   height: 500px !important;
   transition: height 0.2s;
+}
+.taskEditorOpened{
+  transform: scale(1);
 }
 .visibleCreator {
   transform: scale(1);
@@ -262,6 +304,7 @@ main .main__column:last-child {
 }
 
 .test {
+  font-size: 25px;
   width: 100%;
   display: flex;
   justify-content: space-between;
