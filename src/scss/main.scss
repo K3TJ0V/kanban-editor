@@ -231,6 +231,12 @@ main .main__column:last-child {
   background-color: rgb(184, 184, 184);
   border-radius: 10px;
   margin-top: 10px;
+  &__flex{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+  }
   &__description{
     box-sizing: border-box;
     display: block;
