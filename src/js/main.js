@@ -95,8 +95,7 @@ function createColumn() {
 function buttonListCreator(root){
   for (let i = 0; i < columnsContainer.length; i++) {
     const button = document.createElement('button');
-    console.log(columnsContainer[i].innerHTML);
-    button.innerHTML = "";
+    button.innerHTML = columnsContainer[i].children[0].innerHTML;
     root.append(button);
   }
 }
@@ -128,15 +127,18 @@ function addTask1() {
     })
     moveButton.addEventListener('click', ()=>{
       const moveList = document.querySelector('.task__move--list')
+      
       moveList.classList.toggle('taskEditorOpened');
+
       if(moveList.classList == "task__move--list taskEditorOpened"){
         moveList.append(moveButton);
+        const list = document.querySelector('.move__list');
+        buttonListCreator(list);
       } else{
         flexDiv.append(moveButton);
+        const list = document.querySelector('.move__list');
+        list.innerHTML = '';
       }
-      const list = document.querySelector('.move__list');
-      buttonListCreator(list);
-
 
     })
     editButton.addEventListener('click',()=>{
