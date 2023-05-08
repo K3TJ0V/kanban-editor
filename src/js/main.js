@@ -53,6 +53,7 @@ class task{
         this.taskDescription = taskDescription;
         this.moveButton = moveButton;
         this.deleteButton = deleteButton;
+        this.flexDiv = flexDiv;
     }
 }
 
@@ -84,11 +85,20 @@ function createColumn() {
     taskArea.classList.toggle("taskOpen");
   });
   //constructing column
-  Column = new column(newColumn, flexDiv, colHeader, colList, taskArea);
+  Column = new column(newColumn, colHeader, flexDiv, colList, taskArea);
   addColumnClasses(Column);
   columnsContainer.push(Column.flexDiv);
   console.log(columnsContainer);
   return Column;
+}
+
+function buttonListCreator(root){
+  for (let i = 0; i < columnsContainer.length; i++) {
+    const button = document.createElement('button');
+    console.log(columnsContainer[i].innerHTML);
+    button.innerHTML = "";
+    root.append(button);
+  }
 }
 
 function addTask1() {
@@ -124,6 +134,10 @@ function addTask1() {
       } else{
         flexDiv.append(moveButton);
       }
+      const list = document.querySelector('.move__list');
+      buttonListCreator(list);
+
+
     })
     editButton.addEventListener('click',()=>{
       const taskEditor = document.querySelector('.task__editor');
@@ -153,7 +167,7 @@ colSubmit.addEventListener("click", () => {
   column1.newColumn.appendChild(column1.flexDiv);
   column1.newColumn.appendChild(column1.taskArea);
   main.appendChild(column1.newColumn);
-  if (main.childElementCount == 5) {
+  if (main.childElementCount == 6) {
     clear.style.display = "block";
   }
   //setting empty input after adding new column
