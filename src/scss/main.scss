@@ -76,7 +76,7 @@ nav > button {
   left: 0;
 }
 
-main section:nth-child(5) {
+main section:nth-child(6) {
   border-radius: 16px 16px 0 0;
 }
 main .main__column:last-child {
@@ -251,6 +251,28 @@ main .main__column:last-child {
     background: none;
     border: none;
     color: #fff;
+  }
+  &__move--list{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transform: scale(0);
+    position: absolute;
+    top: 25%;
+    background-color: hsla(190, 66%, 38%, 1);
+    border-radius: 16px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    width: 80vw;
+    height: 30vh;
+    padding: 10px;
+    box-shadow: 0px 7px 61px 9px black;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    transition: 0.2s all;
+    z-index: 2;
   }
   &__editor{
     display: flex;

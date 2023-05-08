@@ -35,6 +35,8 @@ add.addEventListener("click", () => {
 creatorClose.addEventListener("click", () => {
   Creator.classList.remove("visibleCreator");
 });
+//column container to hold their headers
+let columnsContainer = [];
 
 class column {
   constructor(newColumn, colHeader, flexDiv, colList, taskArea) {
@@ -84,6 +86,8 @@ function createColumn() {
   //constructing column
   Column = new column(newColumn, flexDiv, colHeader, colList, taskArea);
   addColumnClasses(Column);
+  columnsContainer.push(Column.flexDiv);
+  console.log(columnsContainer);
   return Column;
 }
 
@@ -102,8 +106,8 @@ function addTask1() {
     //appending elements
     editButton.classList.add('task__edit')
     flexDiv.appendChild(editButton);
-    flexDiv.appendChild(moveButton);
     flexDiv.appendChild(deleteButton);
+    flexDiv.appendChild(moveButton);
     flexDiv.classList.add('task__flex')
     newTask.appendChild(taskDescription)
     newTask.appendChild(flexDiv);
@@ -113,7 +117,13 @@ function addTask1() {
       root.remove();
     })
     moveButton.addEventListener('click', ()=>{
-      placeholder;
+      const moveList = document.querySelector('.task__move--list')
+      moveList.classList.toggle('taskEditorOpened');
+      if(moveList.classList == "task__move--list taskEditorOpened"){
+        moveList.append(moveButton);
+      } else{
+        flexDiv.append(moveButton);
+      }
     })
     editButton.addEventListener('click',()=>{
       const taskEditor = document.querySelector('.task__editor');
@@ -155,6 +165,7 @@ clear.addEventListener("click", () => {
   const columns = document.querySelectorAll(".main__column");
   columns.forEach((e) => {
     e.remove();
+    columnsContainer = [];
   });
   clear.style.display = "none";
 });
