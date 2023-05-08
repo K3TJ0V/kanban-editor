@@ -37,6 +37,7 @@ creatorClose.addEventListener("click", () => {
 });
 //column container to hold their headers
 let columnsContainer = [];
+let taskContainer = [];
 
 class column {
   constructor(newColumn, colHeader, flexDiv, colList, taskArea) {
@@ -87,7 +88,7 @@ function createColumn() {
   //constructing column
   Column = new column(newColumn, colHeader, flexDiv, colList, taskArea);
   addColumnClasses(Column);
-  columnsContainer.push(Column.flexDiv);
+  columnsContainer.push(Column);
   console.log(columnsContainer);
   return Column;
 }
@@ -95,7 +96,9 @@ function createColumn() {
 function buttonListCreator(root){
   for (let i = 0; i < columnsContainer.length; i++) {
     const button = document.createElement('button');
-    button.innerHTML = columnsContainer[i].children[0].innerHTML;
+    button.innerHTML = columnsContainer[i].flexDiv.children[0].innerHTML;
+    button.addEventListener('click',()=>{
+    })
     root.append(button);
   }
 }
@@ -155,6 +158,8 @@ function addTask1() {
     
     Task = new task(newTask, taskDescription, moveButton, deleteButton, flexDiv);
     addTaskClasses(Task);
+    taskContainer.push(Task.newTask);
+    console.log(taskContainer);
     return Task;
 }
 
