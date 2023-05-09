@@ -6,17 +6,17 @@ const placeholder = document.querySelector(".placeholder");
 const hamburger = document.querySelector(".header__hamburger--js");
 const navBlock = document.querySelector(".header__nav--js");
 const add = document.querySelector(".main__add--js");
-const clear = document.querySelector(".main__clear--js");
+var clear = document.querySelector(".main__clear--js");
 const Creator = document.querySelector(".main__creator");
 const creatorClose = document.querySelector(".close--js");
 const colInput = document.querySelector(".creator__input--js");
 const main = document.querySelector(".main");
 const colSubmit = document.querySelector(".creator__submit--js");
-const textEditor = document.querySelector('.task__editor--text');
+const textEditor = document.querySelector(".task__editor--text");
 
-const deleteIcon = document.querySelector('.deleteIcon');
-const moveIcon = document.querySelector('.moveIcon');
-const editIcon = document.querySelector('.editIcon');
+const deleteIcon = document.querySelector(".deleteIcon");
+const moveIcon = document.querySelector(".moveIcon");
+const editIcon = document.querySelector(".editIcon");
 
 hamburger.addEventListener("click", () => {
   navBlock.classList.toggle("visible");
@@ -40,22 +40,23 @@ let columnsContainer = [];
 let taskContainer = [];
 
 class column {
-  constructor(newColumn, colHeader, flexDiv, colList, taskArea) {
+  constructor(newColumn, colHeader, flexDiv, colList, taskArea, deleteButton) {
     this.newColumn = newColumn;
     this.colHeader = colHeader;
     this.colList = colList;
     this.flexDiv = flexDiv;
     this.taskArea = taskArea;
+    this.deleteButton = deleteButton;
   }
 }
-class task{
-    constructor(newTask, taskDescription, moveButton, deleteButton, flexDiv){
-        this.newTask = newTask;
-        this.taskDescription = taskDescription;
-        this.moveButton = moveButton;
-        this.deleteButton = deleteButton;
-        this.flexDiv = flexDiv;
-    }
+class task {
+  constructor(newTask, taskDescription, moveButton, deleteButton, flexDiv) {
+    this.newTask = newTask;
+    this.taskDescription = taskDescription;
+    this.moveButton = moveButton;
+    this.deleteButton = deleteButton;
+    this.flexDiv = flexDiv;
+  }
 }
 
 function createColumn() {
@@ -65,6 +66,7 @@ function createColumn() {
   const colHeader = document.createElement("h3");
   const colList = document.createElement("button");
   const taskArea = document.createElement("section");
+  const deleteButton = document.createElement("button");
   // creating text to columns button and headers
   colList.innerText = ">";
   colHeader.innerText = colInput.value;
@@ -72,97 +74,113 @@ function createColumn() {
   const addTask = document.createElement("button");
   addTask.classList.add("column__task");
   addTask.innerText = "Add task";
+  deleteButton.innerHTML = deleteIcon.innerHTML + "Delete column";
   taskArea.appendChild(addTask);
-
-  addTask.addEventListener("click", () => {
+  taskArea.appendChild(deleteButton);
+  //listener to task and delete button
+  addTask.addEventListener("click", (e) => {
     newTask = addTask1();
-    taskArea.appendChild(newTask.newTask);
-
+    let test = e.target.parentElement;
+    test.prepend(newTask.newTask);
+    test.prepend(e.target);
   });
-  
+  deleteButton.addEventListener("click", (element) => {
+    let parentColumn = element.target.parentElement.parentElement;
+    console.log(parentColumn);
+    parentColumn.remove();
+    if(main.childElementCount == 5){
+      clear.style.display = "none";
+    }
+  });
   //listener to new column buttons
   colList.addEventListener("click", () => {
     colList.classList.toggle("opened");
     taskArea.classList.toggle("taskOpen");
   });
   //constructing column
-  Column = new column(newColumn, colHeader, flexDiv, colList, taskArea);
+  Column = new column(
+    newColumn,
+    colHeader,
+    flexDiv,
+    colList,
+    taskArea,
+    deleteButton
+  );
   addColumnClasses(Column);
   columnsContainer.push(Column);
   return Column;
 }
-
-function buttonListCreator(root, taskRoot){
+//move button list
+function buttonListCreator(root, taskRoot) {
   for (let i = 0; i < columnsContainer.length; i++) {
-    const button = document.createElement('button');
+    const button = document.createElement("button");
     button.innerHTML = columnsContainer[i].flexDiv.children[0].innerHTML;
-
-    button.addEventListener('click',()=>{
-      columnsContainer[i].taskArea.appendChild(taskRoot);
-    })
+    button.addEventListener("click", () => {
+      let test = columnsContainer[i].taskArea.firstChild;
+      columnsContainer[i].taskArea.insertBefore(taskRoot, test.nextSibling);
+    });
     root.append(button);
   }
 }
 
 function addTask1() {
-    //Creating Column elements
-    const newTask = document.createElement('section');
-    const taskDescription = document.createElement('span');
-    const moveButton = document.createElement('button');
-    const deleteButton = document.createElement('button');
-    const editButton = document.createElement('button');
-    const flexDiv = document.createElement('div');
-    //button values
-    editButton.innerHTML = editIcon.innerHTML;
-    moveButton.innerHTML = moveIcon.innerHTML;
-    deleteButton.innerHTML = deleteIcon.innerHTML;
-    //appending elements
-    editButton.classList.add('task__edit')
-    flexDiv.appendChild(editButton);
-    flexDiv.appendChild(deleteButton);
-    flexDiv.appendChild(moveButton);
-    flexDiv.classList.add('task__flex')
-    newTask.appendChild(taskDescription)
-    newTask.appendChild(flexDiv);
-    //buttons listeners
-    deleteButton.addEventListener('click', (e)=>{
-      let root = e.currentTarget.parentElement.parentElement;
-      root.remove();
-    })
-    
-    moveButton.addEventListener('click', ()=>{
-      const moveList = document.querySelector('.task__move--list')
-      moveList.classList.toggle('taskEditorOpened');
-      
-      let taskRoot = moveButton.parentElement.parentElement;
+  //Creating Column elements
+  const newTask = document.createElement("section");
+  const taskDescription = document.createElement("span");
+  const moveButton = document.createElement("button");
+  const deleteButton = document.createElement("button");
+  const editButton = document.createElement("button");
+  const flexDiv = document.createElement("div");
+  //button values
+  editButton.innerHTML = editIcon.innerHTML;
+  moveButton.innerHTML = moveIcon.innerHTML;
+  deleteButton.innerHTML = deleteIcon.innerHTML;
+  //appending elements
+  editButton.classList.add("task__edit");
+  flexDiv.appendChild(editButton);
+  flexDiv.appendChild(deleteButton);
+  flexDiv.appendChild(moveButton);
+  flexDiv.classList.add("task__flex");
+  newTask.appendChild(taskDescription);
+  newTask.appendChild(flexDiv);
+  //buttons listeners
+  deleteButton.addEventListener("click", (e) => {
+    let root = e.currentTarget.parentElement.parentElement;
+    root.remove();
+  });
 
-      if(moveList.classList == "task__move--list taskEditorOpened"){
-        moveList.append(moveButton);
-        const list = document.querySelector('.move__list');
-        buttonListCreator(list, taskRoot);
-      } else{
-        flexDiv.append(moveButton);
-        const list = document.querySelector('.move__list');
-        list.innerHTML = '';
-      }
+  moveButton.addEventListener("click", () => {
+    const moveList = document.querySelector(".task__move--list");
+    moveList.classList.toggle("taskEditorOpened");
 
-    })
-    editButton.addEventListener('click',()=>{
-      const taskEditor = document.querySelector('.task__editor');
-      taskEditor.classList.toggle('taskEditorOpened');
-      if(taskEditor.classList == "task__editor taskEditorOpened"){
-        taskEditor.append(editButton);
-      } else{
-        flexDiv.prepend(editButton);
-        taskDescription.innerHTML = textEditor.value;
-        textEditor.value = "";
-      }
-    })
-    
-    Task = new task(newTask, taskDescription, moveButton, deleteButton, flexDiv);
-    addTaskClasses(Task);
-    taskContainer.push(Task.newTask);
-    return Task;
+    let taskRoot = moveButton.parentElement.parentElement;
+
+    if (moveList.classList == "task__move--list taskEditorOpened") {
+      moveList.append(moveButton);
+      const list = document.querySelector(".move__list");
+      buttonListCreator(list, taskRoot);
+    } else {
+      flexDiv.append(moveButton);
+      const list = document.querySelector(".move__list");
+      list.innerHTML = "";
+    }
+  });
+  editButton.addEventListener("click", () => {
+    const taskEditor = document.querySelector(".task__editor");
+    taskEditor.classList.toggle("taskEditorOpened");
+    if (taskEditor.classList == "task__editor taskEditorOpened") {
+      taskEditor.append(editButton);
+    } else {
+      flexDiv.prepend(editButton);
+      taskDescription.innerHTML = textEditor.value;
+      textEditor.value = "";
+    }
+  });
+
+  Task = new task(newTask, taskDescription, moveButton, deleteButton, flexDiv);
+  addTaskClasses(Task);
+  taskContainer.push(Task.newTask);
+  return Task;
 }
 
 colSubmit.addEventListener("click", () => {
@@ -197,12 +215,13 @@ function addColumnClasses(column1) {
   column1.newColumn.classList.add("main__column");
   column1.colList.classList.add("main__column--button");
   column1.taskArea.classList.add("main__column--task");
-  column1.flexDiv.classList.add("test");
-  column1.colHeader.classList.add("test__header");
+  column1.flexDiv.classList.add("column__flex");
+  column1.colHeader.classList.add("column__flex--header");
+  column1.deleteButton.classList.add("column__flex--deleteButton");
 }
-function addTaskClasses(task){
-  task.newTask.classList.add('task');
-  task.taskDescription.classList.add('task__description');
-  task.moveButton.classList.add('task__move');
-  task.deleteButton.classList.add('task__delete');
+function addTaskClasses(task) {
+  task.newTask.classList.add("task");
+  task.taskDescription.classList.add("task__description");
+  task.moveButton.classList.add("task__move");
+  task.deleteButton.classList.add("task__delete");
 }
