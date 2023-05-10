@@ -229,7 +229,7 @@ main .main__column:last-child {
   justify-content: space-between;
   width: 100%;
   min-height: 200px;
-  background-color: rgb(184, 184, 184);
+  background-color: rgba(170, 170, 170, 0.8);
   border-radius: 10px !important;
   margin-top: 10px;
   &__flex{
@@ -244,14 +244,12 @@ main .main__column:last-child {
     max-height: 75%;
     word-wrap: break-word;
     max-width: 100%;
-    color: #fff;
     overflow: auto;
     padding: 10px;
   }
   &__move, &__delete, &__edit{
     background: none;
     border: none;
-    color: #fff;
   }
   &__move--list, &__editor{
     display: flex;
@@ -282,6 +280,25 @@ main .main__column:last-child {
     padding: 5px;
   }
 }
+.move__list{
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+  max-height: 50vh;
+  overflow: scroll;
+  &--button{
+    color: #fff;
+    padding: 10px;
+    background: none;
+    border: #fff solid 4px;
+    transition: 0.2s all;
+  }
+  &--button:hover{
+    background: #fff;
+    color: black;
+  }
+}
+
 
 .taskOpen {
   border-top: 1px solid black;

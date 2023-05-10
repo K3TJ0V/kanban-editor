@@ -114,6 +114,7 @@ function createColumn() {
 function buttonListCreator(root, taskRoot) {
   for (let i = 0; i < columnsContainer.length; i++) {
     const button = document.createElement("button");
+    button.classList.add('move__list--button');
     button.innerHTML = columnsContainer[i].flexDiv.children[0].innerHTML;
     button.addEventListener("click", () => {
       let test = columnsContainer[i].taskArea.firstChild;
