@@ -30,7 +30,7 @@ loadButton.addEventListener('click', ()=>{
   let load = localStorage.getItem('savedContent');
   let loadContent = JSON.parse(load)
   let content = document.querySelector('.columnHolder');
-  content.innerHTML += loadContent;
+  content.innerHTML = loadContent;
   if (columnHolder.childElementCount > 0) {
     clear.style.display = "block";
   }
