@@ -105,9 +105,8 @@ function createColumn() {
   });
   deleteButton.addEventListener("click", (element) => {
     let parentColumn = element.target.parentElement.parentElement;
-    console.log(parentColumn);
     parentColumn.remove();
-    if(main.childElementCount == 5){
+    if(columnHolder.childElementCount == 0){
       clear.style.display = "none";
     }
   });
