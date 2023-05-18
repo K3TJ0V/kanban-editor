@@ -49,6 +49,8 @@ a {
     cursor: pointer;
   }
   &__nav {
+    display: flex;
+    flex-flow: column;
     transform: translateX(-100%);
     transition: 0.2s all;
     position: absolute;
@@ -59,8 +61,27 @@ a {
     padding: 16px;
     padding-top: 70px;
     z-index: 2;
+    &--saveButton, &--loadButton{
+      background: none;
+      border: 2px #fff solid;
+      border-radius: 16px;
+      color: #fff;
+      padding: 10px;
+      transition: 0.2s all;
+    }
+    &--saveButton:hover, &--loadButton:hover{
+      color: black;
+      background-color: #fff;
+    }
   }
 }
+.buttonsHolder{
+  margin-top: 50px;
+  display: flex;
+  flex-flow: column;
+  gap: 30px;
+}
+
 .nav {
   &__settings {
     align-items: center;

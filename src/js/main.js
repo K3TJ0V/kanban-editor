@@ -11,12 +11,31 @@ const Creator = document.querySelector(".main__creator");
 const creatorClose = document.querySelector(".close--js");
 const colInput = document.querySelector(".creator__input--js");
 const main = document.querySelector(".main");
+const columnHolder = document.querySelector('.columnHolder');
 const colSubmit = document.querySelector(".creator__submit--js");
 const textEditor = document.querySelector(".task__editor--text");
+const saveButton = document.querySelector('.nav--savebutton--js');
+const loadButton = document.querySelector('.nav--loadbutton--js');
 
 const deleteIcon = document.querySelector(".deleteIcon");
 const moveIcon = document.querySelector(".moveIcon");
 const editIcon = document.querySelector(".editIcon");
+
+saveButton.addEventListener('click', ()=>{
+  let content = JSON.stringify(columnHolder.innerHTML);
+  localStorage.setItem('savedContent', content);
+  
+})
+loadButton.addEventListener('click', ()=>{
+  let load = localStorage.getItem('savedContent');
+  let loadContent = JSON.parse(load)
+  let content = document.querySelector('.columnHolder');
+  content.innerHTML += loadContent;
+  if (columnHolder.childElementCount > 0) {
+    clear.style.display = "block";
+  }
+
+})
 
 hamburger.addEventListener("click", () => {
   navBlock.classList.toggle("visible");
@@ -194,8 +213,8 @@ colSubmit.addEventListener("click", () => {
   column1.flexDiv.appendChild(column1.colList);
   column1.newColumn.appendChild(column1.flexDiv);
   column1.newColumn.appendChild(column1.taskArea);
-  main.appendChild(column1.newColumn);
-  if (main.childElementCount == 6) {
+  columnHolder.appendChild(column1.newColumn);
+  if (columnHolder.childElementCount > 0) {
     clear.style.display = "block";
   }
   //setting empty input after adding new column
