@@ -6,7 +6,7 @@ const placeholder = document.querySelector(".placeholder");
 const hamburger = document.querySelector(".header__hamburger--js");
 const navBlock = document.querySelector(".header__nav--js");
 const add = document.querySelector(".main__add--js");
-var clear = document.querySelector(".main__clear--js");
+const clear = document.querySelector(".main__clear--js");
 const Creator = document.querySelector(".main__creator");
 const creatorClose = document.querySelector(".close--js");
 const colInput = document.querySelector(".creator__input--js");
@@ -243,4 +243,10 @@ function addTaskClasses(task) {
   task.taskDescription.classList.add("task__description");
   task.moveButton.classList.add("task__move");
   task.deleteButton.classList.add("task__delete");
+}
+
+
+if(window.innerWidth > 800){
+  const testing = document.querySelector('.main__buttonsFlex')
+  header.appendChild(testing);
 }
