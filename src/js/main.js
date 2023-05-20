@@ -115,6 +115,21 @@ function createColumn() {
     colList.classList.toggle("opened");
     taskArea.classList.toggle("taskOpen");
   });
+  //listener to handle droping tasks
+  taskArea.addEventListener('dragover', (e)=>{
+    e.preventDefault();
+  })
+  taskArea.addEventListener('dragenter', ()=>{
+    newColumn.style.backgroundColor = 'rgba(170, 204, 206, 0.579)'
+  })
+  taskArea.addEventListener('dragleave', ()=>{
+    newColumn.style.backgroundColor = 'rgba(208, 251, 254, 0.579)'
+  })
+  taskArea.addEventListener('drop', (e)=>{
+    e.preventDefault();
+    console.log('dupa');
+    newColumn.style.backgroundColor = 'rgba(208, 251, 254, 0.579)'
+  })
   //constructing column
   Column = new column(
     newColumn,
@@ -167,6 +182,12 @@ function addTask1() {
     let root = e.currentTarget.parentElement.parentElement;
     root.remove();
   });
+  let currentlyDragged;
+  newTask.setAttribute('draggable', "true");
+  newTask.addEventListener('dragstart', (e)=>{
+    currentlyDragged = e;
+    console.log(currentlyDragged);
+  })
 
   moveButton.addEventListener("click", () => {
     const moveList = document.querySelector(".task__move--list");
@@ -250,3 +271,4 @@ if(window.innerWidth > 800){
   const testing = document.querySelector('.main__buttonsFlex')
   header.appendChild(testing);
 }
+

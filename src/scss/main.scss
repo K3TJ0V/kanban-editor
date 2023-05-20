@@ -48,7 +48,7 @@ a {
     box-sizing: border-box;
     width: 80vw;
     color: black;
-    background-color: #fff;
+    background-color: hsl(184, 100%, 92%);
     display: flex;
     align-items: center;
     margin: auto;
@@ -166,9 +166,10 @@ main .main__column:last-child {
     @media (min-width: 800px){
       min-width: 25%;
       max-width: 30%;
-      background-color: rgba(255, 255, 255, 0.686);
+      background-color: rgba(208, 251, 254, 0.579);
       border-radius: 20px;
       border-bottom: none;
+      transition: 0.2s all;
     }
     &--task {
       height: 0;
@@ -320,6 +321,10 @@ main .main__column:last-child {
   background-color: rgba(170, 170, 170, 0.8);
   border-radius: 10px !important;
   margin-top: 10px;
+  @media (min-width: 800px) {
+    border: 1px solid black;
+    margin: 5px;
+  }
   &__flex{
     display: flex;
     justify-content: center;
