@@ -131,6 +131,8 @@ main .main__column:last-child {
   box-shadow: inset 0px -8px hsla(190, 68%, 33%, 0.306);
   @media (min-width: 800px){
     border-radius: 20px;
+    box-shadow: none;
+
   }
 }
 .main {
@@ -167,8 +169,6 @@ main .main__column:last-child {
       background-color: rgba(255, 255, 255, 0.686);
       border-radius: 20px;
       border-bottom: none;
-      box-shadow: inset 0px -8px hsla(190, 68%, 33%, 0.306);
-
     }
     &--task {
       height: 0;
@@ -180,12 +180,14 @@ main .main__column:last-child {
       flex-flow: column;
       align-items: center;
       justify-content: space-between;
+      &::-webkit-scrollbar{
+        display: none;
+      }
       @media (min-width: 800px){
         background: none;
         border: none;
         border-radius: 20px;
         height: 100%;
-        box-shadow: inset 0px -8px hsla(190, 68%, 33%, 0.306);
       }
     }
     &--button {
@@ -420,20 +422,33 @@ main .main__column:last-child {
   z-index: 1;
 }
 
+
+
 .column__flex {
   font-size: 25px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media (min-width: 800px){
+  &::-webkit-scrollbar{
     display: none;
+  }
+  @media (min-width: 800px){
+    text-align: center;
+    overflow: scroll;
   }
   &--header{
     inline-size: 88vw;
-    overflow: scroll;
+    overflow: hidden;
+    &::-webkit-scrollbar{
+      height: 5px;
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: rgb(148, 148, 148);
+      border-radius: 50px;
+    }
     @media (min-width: 800px){
-      overflow: auto;
+      overflow-x: scroll;
     }
   }
   &--deleteButton{
@@ -449,11 +464,20 @@ main .main__column:last-child {
 }
 
 .columnHolder{
+  overflow: hidden;
   @media (min-width: 800px){
     display: flex;
     gap: 30px;
     height: 80vh;
     width: 100vw;
-    overflow: scroll;
+    overflow-x: scroll;
+    &::-webkit-scrollbar{
+      height: 5px;
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: rgb(132, 132, 132);
+      border-radius: 50px;
+    }
+    
   }
 }
