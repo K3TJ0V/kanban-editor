@@ -20,6 +20,8 @@ const loadButton = document.querySelector('.nav--loadbutton--js');
 const deleteIcon = document.querySelector(".deleteIcon");
 const moveIcon = document.querySelector(".moveIcon");
 const editIcon = document.querySelector(".editIcon");
+//setting variable for dragged element
+let currentlyDragged;
 
 saveButton.addEventListener('click', ()=>{
   let content = JSON.stringify(columnHolder.innerHTML);
@@ -120,15 +122,15 @@ function createColumn() {
     e.preventDefault();
   })
   taskArea.addEventListener('dragenter', ()=>{
-    newColumn.style.backgroundColor = 'rgba(170, 204, 206, 0.579)'
+    newColumn.style.backgroundColor = 'rgba(170, 204, 206, 0.579)';
   })
   taskArea.addEventListener('dragleave', ()=>{
-    newColumn.style.backgroundColor = 'rgba(208, 251, 254, 0.579)'
+    newColumn.style.backgroundColor = 'rgba(208, 251, 254, 0.579)';
   })
   taskArea.addEventListener('drop', (e)=>{
     e.preventDefault();
-    console.log('dupa');
-    newColumn.style.backgroundColor = 'rgba(208, 251, 254, 0.579)'
+    newColumn.style.backgroundColor = 'rgba(208, 251, 254, 0.579)';
+    e.target.insertBefore(currentlyDragged, e.target.lastChild)
   })
   //constructing column
   Column = new column(
@@ -182,11 +184,11 @@ function addTask1() {
     let root = e.currentTarget.parentElement.parentElement;
     root.remove();
   });
-  let currentlyDragged;
+  //dragging listener
   newTask.setAttribute('draggable', "true");
   newTask.addEventListener('dragstart', (e)=>{
-    currentlyDragged = e;
-    console.log(currentlyDragged);
+    e.stopPropagation()
+    currentlyDragged = e.target;
   })
 
   moveButton.addEventListener("click", () => {

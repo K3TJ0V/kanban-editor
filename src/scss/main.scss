@@ -344,6 +344,11 @@ main .main__column:last-child {
     background: none;
     border: none;
   }
+  &__move{
+    @media (min-width: 800px) {
+      display: none;
+    }
+  }
   &__move--list, &__editor{
     display: flex;
     align-items: center;
