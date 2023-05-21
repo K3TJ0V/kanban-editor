@@ -106,7 +106,7 @@ function createColumn() {
     test.prepend(e.target);
   });
   deleteButton.addEventListener("click", (element) => {
-    let parentColumn = element.target.parentElement.parentElement;
+    let parentColumn = element.currentTarget.parentElement.parentElement;
     parentColumn.remove();
     if(columnHolder.childElementCount == 0){
       clear.style.display = "none";
@@ -130,7 +130,10 @@ function createColumn() {
   taskArea.addEventListener('drop', (e)=>{
     e.preventDefault();
     newColumn.style.backgroundColor = 'rgba(208, 251, 254, 0.579)';
-    e.target.insertBefore(currentlyDragged, e.target.lastChild)
+    e.currentTarget.insertBefore(currentlyDragged, e.currentTarget.lastChild)
+    // if(e.currentTarget.classList == "task"){
+    //   e.currentTarget.parentElement
+    // }
   })
   //constructing column
   Column = new column(
@@ -187,8 +190,7 @@ function addTask1() {
   //dragging listener
   newTask.setAttribute('draggable', "true");
   newTask.addEventListener('dragstart', (e)=>{
-    e.stopPropagation()
-    currentlyDragged = e.target;
+    currentlyDragged = e.currentTarget;
   })
 
   moveButton.addEventListener("click", () => {
