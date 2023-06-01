@@ -1,5 +1,24 @@
-import "normalize.css";
 import "../scss/main.scss";
+import "normalize.css";
+
+Array.prototype.removeValue = function (value) {
+  let indexValue = this.indexOf(value);
+  if (indexValue != -1) {
+    this.splice(indexValue, 1);
+  }
+};
+
+function appendDefault(valueObject, defaultValueObject) {
+  if (valueObject === undefined || valueObject === null) {
+    valueObject = {}
+  }
+  for (let [key, value] of Object.entries(defaultValueObject)) {
+    if (!valueObject.hasOwnProperty(key)) {
+      valueObject[key] = value;
+    }
+  }
+  return valueObject;
+}
 
 const header = document.querySelector(".header");
 const placeholder = document.querySelector(".placeholder");
@@ -16,26 +35,27 @@ const colSubmit = document.querySelector(".creator__submit--js");
 const textEditor = document.querySelector(".task__editor--text");
 const saveButton = document.querySelector('.nav--savebutton--js');
 const loadButton = document.querySelector('.nav--loadbutton--js');
-
 const deleteIcon = document.querySelector(".deleteIcon");
 const moveIcon = document.querySelector(".moveIcon");
 const editIcon = document.querySelector(".editIcon");
 //setting variable for dragged element
 let currentlyDragged;
 
-saveButton.addEventListener('click', ()=>{
-  let content = JSON.stringify(columnHolder.innerHTML);
-  localStorage.setItem('savedContent', content);
-  
+let data = [];
+
+saveButton.addEventListener('click', () => {
+  let content = JSON.stringify(data);
+  localStorage.setItem('data', content);
 })
-loadButton.addEventListener('click', ()=>{
-  let load = localStorage.getItem('savedContent');
-  let loadContent = JSON.parse(load)
-  let content = document.querySelector('.columnHolder');
-  content.innerHTML = loadContent;
-  if (columnHolder.childElementCount > 0) {
-    clear.style.display = "block";
-  }
+
+loadButton.addEventListener('click', () => {
+  columnHolder.innerHTML = '';
+  data.splice(0);
+  let load = localStorage.getItem('data');
+  let loadContent = JSON.parse(load);
+  loadContent.forEach((column) => {
+    createAddColumn(column);
+  })
 
 })
 
@@ -61,26 +81,32 @@ let columnsContainer = [];
 let taskContainer = [];
 
 class column {
-  constructor(newColumn, colHeader, flexDiv, colList, taskArea, deleteButton) {
+  constructor(newColumn, colHeader, flexDiv, colList, taskArea, deleteButton, columnData) {
     this.newColumn = newColumn;
     this.colHeader = colHeader;
     this.colList = colList;
     this.flexDiv = flexDiv;
     this.taskArea = taskArea;
     this.deleteButton = deleteButton;
+    this.columnData = columnData;
   }
 }
 class task {
-  constructor(newTask, taskDescription, moveButton, deleteButton, flexDiv) {
+  constructor(newTask, taskDescription, moveButton, deleteButton, flexDiv, taskData) {
     this.newTask = newTask;
     this.taskDescription = taskDescription;
     this.moveButton = moveButton;
     this.deleteButton = deleteButton;
     this.flexDiv = flexDiv;
+    this.taskData = taskData;
   }
 }
 
-function createColumn() {
+function createColumn(loadedColData) {
+  let columnData = appendDefault(loadedColData, {
+    name: '',
+    taskList: []
+  });
   //Creating Column elements
   const newColumn = document.createElement("section");
   const flexDiv = document.createElement("div");
@@ -88,9 +114,11 @@ function createColumn() {
   const colList = document.createElement("button");
   const taskArea = document.createElement("section");
   const deleteButton = document.createElement("button");
+  newColumn.columnData = columnData;
   // creating text to columns button and headers
   colList.innerText = ">";
-  colHeader.innerText = colInput.value;
+  colHeader.innerText = columnData.name;
+  columnData.name = columnData.name;
   // creating task button
   const addTask = document.createElement("button");
   addTask.classList.add("column__task");
@@ -98,9 +126,16 @@ function createColumn() {
   deleteButton.innerHTML = deleteIcon.innerHTML + "Delete column";
   taskArea.appendChild(addTask);
   taskArea.appendChild(deleteButton);
+
+  flexDiv.appendChild(colHeader);
+  flexDiv.appendChild(colList);
+  newColumn.appendChild(flexDiv);
+  newColumn.appendChild(taskArea);
+
   //listener to task and delete button
   addTask.addEventListener("click", (e) => {
-    newTask = addTask1();
+    let newTask = addTask1(columnData.taskList);
+    columnData.taskList.push(newTask.taskData);
     let test = e.target.parentElement;
     test.prepend(newTask.newTask);
     test.prepend(e.target);
@@ -108,7 +143,8 @@ function createColumn() {
   deleteButton.addEventListener("click", (element) => {
     let parentColumn = element.currentTarget.parentElement.parentElement;
     parentColumn.remove();
-    if(columnHolder.childElementCount == 0){
+    data.removeValue(columnData);
+    if (columnHolder.childElementCount == 0) {
       clear.style.display = "none";
     }
   });
@@ -118,23 +154,29 @@ function createColumn() {
     taskArea.classList.toggle("taskOpen");
   });
   //listener to handle droping tasks
-  taskArea.addEventListener('dragover', (e)=>{
+  taskArea.addEventListener('dragover', (e) => {
     e.preventDefault();
   })
-  taskArea.addEventListener('dragenter', ()=>{
+  taskArea.addEventListener('dragenter', () => {
     newColumn.style.backgroundColor = 'rgba(170, 204, 206, 0.579)';
   })
-  taskArea.addEventListener('dragleave', ()=>{
+  taskArea.addEventListener('dragleave', () => {
     newColumn.style.backgroundColor = 'rgba(208, 251, 254, 0.579)';
   })
-  taskArea.addEventListener('drop', (e)=>{
+  taskArea.addEventListener('drop', (e) => {
     e.preventDefault();
     newColumn.style.backgroundColor = 'rgba(208, 251, 254, 0.579)';
-    e.currentTarget.insertBefore(currentlyDragged, e.currentTarget.lastChild)
-    // if(e.currentTarget.classList == "task"){
-    //   e.currentTarget.parentElement
-    // }
+    e.currentTarget.insertBefore(currentlyDragged, e.currentTarget.lastChild);
+    currentlyDragged.taskPreviousDataContainer.removeValue(currentlyDragged.taskData);
+    columnData.taskList.push(currentlyDragged.taskData);
   })
+
+  columnData.taskList.forEach((e) => {
+    newTask = addTask1(columnData.taskList, e);
+    taskArea.prepend(newTask.newTask);
+    taskArea.prepend(addTask);
+  })
+
   //constructing column
   Column = new column(
     newColumn,
@@ -142,14 +184,15 @@ function createColumn() {
     flexDiv,
     colList,
     taskArea,
-    deleteButton
+    deleteButton,
+    columnData
   );
   addColumnClasses(Column);
   columnsContainer.push(Column);
   return Column;
 }
 //move button list
-function buttonListCreator(root, taskRoot) {
+function buttonListCreator(root, taskRoot, dataContainer, taskData) {
   for (let i = 0; i < columnsContainer.length; i++) {
     const button = document.createElement("button");
     button.classList.add('move__list--button');
@@ -157,12 +200,15 @@ function buttonListCreator(root, taskRoot) {
     button.addEventListener("click", () => {
       let test = columnsContainer[i].taskArea.firstChild;
       columnsContainer[i].taskArea.insertBefore(taskRoot, test.nextSibling);
+      dataContainer.removeValue(taskData);
+      columnsContainer[i].columnData.taskList.push(taskData);
     });
     root.append(button);
   }
 }
 
-function addTask1() {
+function addTask1(dataContainer, loadedTaskData) {
+  let taskData = appendDefault(loadedTaskData, { description: '' })
   //Creating Column elements
   const newTask = document.createElement("section");
   const taskDescription = document.createElement("span");
@@ -170,6 +216,7 @@ function addTask1() {
   const deleteButton = document.createElement("button");
   const editButton = document.createElement("button");
   const flexDiv = document.createElement("div");
+  newTask.taskData = taskData;
   //button values
   editButton.innerHTML = editIcon.innerHTML;
   moveButton.innerHTML = moveIcon.innerHTML;
@@ -182,15 +229,20 @@ function addTask1() {
   flexDiv.classList.add("task__flex");
   newTask.appendChild(taskDescription);
   newTask.appendChild(flexDiv);
+
+  taskDescription.innerText = taskData.description;
   //buttons listeners
   deleteButton.addEventListener("click", (e) => {
     let root = e.currentTarget.parentElement.parentElement;
     root.remove();
+    dataContainer.removeValue(taskData);
   });
   //dragging listener
   newTask.setAttribute('draggable', "true");
-  newTask.addEventListener('dragstart', (e)=>{
+  newTask.addEventListener('dragstart', (e) => {
     currentlyDragged = e.currentTarget;
+    currentlyDragged.taskPreviousDataContainer = dataContainer;
+    currentlyDragged.taskData = taskData;
   })
 
   moveButton.addEventListener("click", () => {
@@ -202,7 +254,7 @@ function addTask1() {
     if (moveList.classList == "task__move--list taskEditorOpened") {
       moveList.append(moveButton);
       const list = document.querySelector(".move__list");
-      buttonListCreator(list, taskRoot);
+      buttonListCreator(list, taskRoot, dataContainer, taskData);
     } else {
       flexDiv.append(moveButton);
       const list = document.querySelector(".move__list");
@@ -217,30 +269,30 @@ function addTask1() {
     } else {
       flexDiv.prepend(editButton);
       taskDescription.innerHTML = textEditor.value;
+      taskData.description = textEditor.value;
       textEditor.value = "";
     }
   });
 
-  Task = new task(newTask, taskDescription, moveButton, deleteButton, flexDiv);
+  Task = new task(newTask, taskDescription, moveButton, deleteButton, flexDiv, taskData);
   addTaskClasses(Task);
   taskContainer.push(Task.newTask);
   return Task;
 }
 
-colSubmit.addEventListener("click", () => {
-  // creating columns
-  let column1 = createColumn();
-
-  // adding flexDiv to position elements of column
-  // above taskArea and just simplify it
-  column1.flexDiv.appendChild(column1.colHeader);
-  column1.flexDiv.appendChild(column1.colList);
-  column1.newColumn.appendChild(column1.flexDiv);
-  column1.newColumn.appendChild(column1.taskArea);
+function createAddColumn(columnData) {
+  let column1 = createColumn(columnData);
+  data.push(column1.columnData);
   columnHolder.appendChild(column1.newColumn);
   if (columnHolder.childElementCount > 0) {
     clear.style.display = "block";
   }
+}
+
+colSubmit.addEventListener("click", () => {
+  // creating columns
+  let columnName = colInput.value;
+  createAddColumn({ name: columnName });
   //setting empty input after adding new column
   colInput.value = "";
 });
@@ -270,9 +322,7 @@ function addTaskClasses(task) {
   task.deleteButton.classList.add("task__delete");
 }
 
-
-if(window.innerWidth > 800){
+if (window.innerWidth > 800) {
   const testing = document.querySelector('.main__buttonsFlex')
   header.appendChild(testing);
 }
-
