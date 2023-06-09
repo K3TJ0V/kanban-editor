@@ -1,32 +1,27 @@
 html {
   min-height: 100%;
 }
+
 body {
   background: hsla(190, 66%, 38%, 1);
 
-  background: linear-gradient(
-    180deg,
-    hsla(190, 66%, 38%, 1) 0%,
-    hsla(191, 70%, 32%, 1) 0%,
-    hsla(186, 68%, 38%, 1) 50%,
-    hsla(182, 75%, 53%, 1) 100%
-  );
+  background: linear-gradient(180deg,
+      hsla(190, 66%, 38%, 1) 0%,
+      hsla(191, 70%, 32%, 1) 0%,
+      hsla(186, 68%, 38%, 1) 50%,
+      hsla(182, 75%, 53%, 1) 100%);
 
-  background: -moz-linear-gradient(
-    180deg,
-    hsla(190, 66%, 38%, 1) 0%,
-    hsla(191, 70%, 32%, 1) 0%,
-    hsla(186, 68%, 38%, 1) 50%,
-    hsla(182, 75%, 53%, 1) 100%
-  );
+  background: -moz-linear-gradient(180deg,
+      hsla(190, 66%, 38%, 1) 0%,
+      hsla(191, 70%, 32%, 1) 0%,
+      hsla(186, 68%, 38%, 1) 50%,
+      hsla(182, 75%, 53%, 1) 100%);
 
-  background: -webkit-linear-gradient(
-    180deg,
-    hsla(190, 66%, 38%, 1) 0%,
-    hsla(191, 70%, 32%, 1) 0%,
-    hsla(186, 68%, 38%, 1) 50%,
-    hsla(182, 75%, 53%, 1) 100%
-  );
+  background: -webkit-linear-gradient(180deg,
+      hsla(190, 66%, 38%, 1) 0%,
+      hsla(191, 70%, 32%, 1) 0%,
+      hsla(186, 68%, 38%, 1) 50%,
+      hsla(182, 75%, 53%, 1) 100%);
   height: 100vh;
 
   font-family: "Roboto";
@@ -34,14 +29,17 @@ body {
   height: 100%;
   width: 100%;
 }
+
 a {
   text-decoration: none;
   color: #fff;
 }
+
 .header {
   color: #fff;
   display: flex;
   gap: 10px;
+
   @media (min-width: 800px) {
     height: 80px;
     padding: 20px;
@@ -55,31 +53,37 @@ a {
     margin: auto;
     gap: 50px;
     border-radius: 0 0 50px 50px;
-  } 
-  &__flexDiv{
+  }
+
+  &__flexDiv {
     display: flex;
     gap: 15px
   }
+
   @media (min-width: 800px) {
-  &__flexDiv{
-    gap: 40px;
+    &__flexDiv {
+      gap: 40px;
+    }
   }
-  }
-  &__h1{
+
+  &__h1 {
     @media (min-width: 800px) {
       padding-bottom: 5px;
     }
   }
+
   &__hamburger {
     background: none;
     border: none;
     color: #fff;
     cursor: pointer;
-    @media (min-width: 800px){
-     color: black;
-      
+
+    @media (min-width: 800px) {
+      color: black;
+
     }
   }
+
   &__nav {
     box-sizing: border-box;
     display: flex;
@@ -94,7 +98,9 @@ a {
     padding: 16px;
     padding-top: 70px;
     z-index: 2;
-    &--saveButton, &--loadButton{
+
+    &--saveButton,
+    &--loadButton {
       background: none;
       border: 2px #fff solid;
       border-radius: 16px;
@@ -102,13 +108,16 @@ a {
       padding: 10px;
       transition: 0.2s all;
     }
-    &--saveButton:hover, &--loadButton:hover{
+
+    &--saveButton:hover,
+    &--loadButton:hover {
       color: black;
       background-color: #fff;
     }
   }
 }
-.buttonsHolder{
+
+.buttonsHolder {
   margin-top: 50px;
   display: flex;
   flex-flow: column;
@@ -124,7 +133,7 @@ a {
   }
 }
 
-nav > button {
+nav>button {
   position: absolute;
   top: 20px;
   left: 0;
@@ -132,20 +141,24 @@ nav > button {
 
 main section:nth-child(1) {
   border-radius: 16px 16px 0 0;
-  @media (min-width: 800px){
+
+  @media (min-width: 800px) {
     border-radius: 20px;
   }
 }
+
 main .main__column:last-child {
   border-radius: 0 0 16px 16px;
   border: none;
   box-shadow: inset 0px -8px hsla(190, 68%, 33%, 0.306);
-  @media (min-width: 800px){
+
+  @media (min-width: 800px) {
     border-radius: 20px;
     box-shadow: none;
 
   }
 }
+
 .main {
   margin-top: 50px;
   font-size: 28px;
@@ -153,9 +166,11 @@ main .main__column:last-child {
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  &__buttonsFlex{
+
+  &__buttonsFlex {
     display: flex;
     gap: 20px;
+
     @media (min-width: 800px) {
       display: flex;
       gap: 20px;
@@ -164,6 +179,7 @@ main .main__column:last-child {
       padding-top: 25px;
     }
   }
+
   &__column {
     box-sizing: border-box;
     padding: 10px;
@@ -174,7 +190,8 @@ main .main__column:last-child {
     background-color: #fff;
     width: 90vw;
     border-bottom: 1px black solid;
-    @media (min-width: 800px){
+
+    @media (min-width: 800px) {
       min-width: 25%;
       max-width: 30%;
       background-color: rgba(208, 251, 254, 0.579);
@@ -182,6 +199,7 @@ main .main__column:last-child {
       border-bottom: none;
       transition: 0.2s all;
     }
+
     &--task {
       height: 0;
       width: 100%;
@@ -192,16 +210,19 @@ main .main__column:last-child {
       flex-flow: column;
       align-items: center;
       justify-content: space-between;
-      &::-webkit-scrollbar{
+
+      &::-webkit-scrollbar {
         display: none;
       }
-      @media (min-width: 800px){
+
+      @media (min-width: 800px) {
         background: none;
         border: none;
         border-radius: 20px;
         height: 100%;
       }
     }
+
     &--button {
       width: 50px;
       height: 50px;
@@ -210,12 +231,14 @@ main .main__column:last-child {
       transition: 0.2s all;
       border-radius: 50%;
       cursor: pointer;
+
       @media (min-width: 800px) {
         display: none;
       }
     }
   }
-  &__creator{
+
+  &__creator {
     transform: scale(0);
     position: absolute;
     top: 15%;
@@ -233,12 +256,14 @@ main .main__column:last-child {
     gap: 10px;
     transition: 0.2s all;
     z-index: 2;
+
     &--input {
       border-radius: 10px;
       border: none;
       padding: 5px;
       margin-top: 20px;
     }
+
     &--submit {
       border: none;
       background-color: #fff;
@@ -247,20 +272,24 @@ main .main__column:last-child {
       width: 60px;
       align-self: center;
     }
+
     &--flex {
       display: flex;
       flex-flow: column;
     }
+
     &--close {
       align-self: flex-end;
       color: #fff;
       border: none;
       background: none;
     }
+
     &--example {
       opacity: 0.6;
     }
   }
+
   &__add {
     color: #fff;
     background: none;
@@ -269,15 +298,18 @@ main .main__column:last-child {
     position: relative;
     margin-bottom: 40px;
     cursor: pointer;
+
     @media (min-width: 800px) {
       color: black;
       margin-left: -120px;
     }
+
     @media (min-width: 1200px) {
       color: black;
     }
   }
-  &__clear{
+
+  &__clear {
     color: #fff;
     background: none;
     border: none;
@@ -286,11 +318,13 @@ main .main__column:last-child {
     margin-bottom: 40px;
     cursor: pointer;
     display: none;
+
     @media (min-width: 800px) {
       color: black;
-      
+
     }
   }
+
   &__add::before {
     position: absolute;
     content: "+";
@@ -300,6 +334,7 @@ main .main__column:last-child {
     top: -60px;
     left: 0;
   }
+
   &__clear::before {
     position: absolute;
     content: "-";
@@ -310,14 +345,16 @@ main .main__column:last-child {
     left: 0;
   }
 }
-.column__task{
+
+.column__task {
   background: none;
   border: none;
   margin-top: 40px;
   position: relative;
 
 }
-.column__task::before{
+
+.column__task::before {
   content: "+";
   font-size: 40px;
   position: absolute;
@@ -327,7 +364,7 @@ main .main__column:last-child {
 }
 
 
-.task{
+.task {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -337,17 +374,20 @@ main .main__column:last-child {
   background-color: rgba(210, 210, 210, 0.987);
   border-radius: 10px !important;
   margin-top: 10px;
+
   @media (min-width: 800px) {
     border: 1px solid black;
     margin: 5px;
   }
-  &__flex{
+
+  &__flex {
     display: flex;
     justify-content: center;
     gap: 15px;
     width: 100%;
   }
-  &__description{
+
+  &__description {
     box-sizing: border-box;
     display: block;
     max-height: 75%;
@@ -356,16 +396,22 @@ main .main__column:last-child {
     overflow: auto;
     padding: 10px;
   }
-  &__move, &__delete, &__edit{
+
+  &__move,
+  &__delete,
+  &__edit {
     background: none;
     border: none;
   }
-  &__move{
+
+  &__move {
     @media (min-width: 800px) {
       display: none;
     }
   }
-  &__move--list, &__editor{
+
+  &__move--list,
+  &__editor {
     display: flex;
     align-items: center;
     gap: 60px;
@@ -387,13 +433,14 @@ main .main__column:last-child {
     z-index: 2;
   }
 
-  &__editor--text{
+  &__editor--text {
     width: 95%;
     border-radius: 16px;
     padding: 5px;
   }
 }
-.move__list{
+
+.move__list {
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -402,14 +449,16 @@ main .main__column:last-child {
   max-height: 50vh;
   width: 80vw;
   overflow: scroll;
-  &--button{
+
+  &--button {
     color: #fff;
     padding: 10px;
     background: none;
     border: #fff solid 4px;
     transition: 0.2s all;
   }
-  &--button:hover{
+
+  &--button:hover {
     background: #fff;
     color: black;
   }
@@ -418,16 +467,20 @@ main .main__column:last-child {
 
 .taskOpen {
   border-top: 1px solid black;
+
   @media (min-width: 800px) {
     border: none;
     height: 100%;
   }
+
   height: 500px !important;
   transition: height 0.2s;
 }
-.taskEditorOpened{
+
+.taskEditorOpened {
   transform: scale(1);
 }
+
 .visibleCreator {
   transform: scale(1);
 }
@@ -456,28 +509,35 @@ main .main__column:last-child {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  &::-webkit-scrollbar{
+
+  &::-webkit-scrollbar {
     display: none;
   }
-  @media (min-width: 800px){
+
+  @media (min-width: 800px) {
     text-align: center;
     overflow: scroll;
   }
-  &--header{
+
+  &--header {
     inline-size: 88vw;
     overflow: hidden;
-    &::-webkit-scrollbar{
+
+    &::-webkit-scrollbar {
       height: 5px;
     }
-    &::-webkit-scrollbar-thumb{
+
+    &::-webkit-scrollbar-thumb {
       background-color: rgb(148, 148, 148);
       border-radius: 50px;
     }
-    @media (min-width: 800px){
+
+    @media (min-width: 800px) {
       overflow-x: scroll;
     }
   }
-  &--deleteButton{
+
+  &--deleteButton {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -489,21 +549,24 @@ main .main__column:last-child {
   }
 }
 
-.columnHolder{
+.columnHolder {
   overflow: hidden;
-  @media (min-width: 800px){
+
+  @media (min-width: 800px) {
     display: flex;
     gap: 30px;
     height: 80vh;
     width: 100vw;
     overflow-x: scroll;
-    &::-webkit-scrollbar{
+
+    &::-webkit-scrollbar {
       height: 5px;
     }
-    &::-webkit-scrollbar-thumb{
+
+    &::-webkit-scrollbar-thumb {
       background-color: rgb(132, 132, 132);
       border-radius: 50px;
     }
-    
+
   }
 }
