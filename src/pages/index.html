@@ -5,14 +5,14 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="../../manifest.json">
   <title>Document</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap" rel="stylesheet" />
   <meta name="description"
-    content="An kanban editor that allows you to organise your work by creating columns that defines importance of tasks added to them.">
+  content="An kanban editor that allows you to organise your work by creating columns that defines importance of tasks added to them.">
 </head>
-
 <body>
   <nav class="header__nav header__nav--js">
     <span class="placeholder"></span>
@@ -97,6 +97,11 @@
     </svg>
   </template>
   <script type="module" src="../js/main.js"></script>
+  <script>
+    if('serviceworker' in navigator){
+      navigator.serviceWorker.register(new URL('../js/servise-worker.js'), import.meta.url)
+    }
+  </script>
 </body>
 
 </html>
