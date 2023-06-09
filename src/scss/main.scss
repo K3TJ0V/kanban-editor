@@ -48,13 +48,23 @@ a {
     box-sizing: border-box;
     width: 80vw;
     color: black;
-    background-color: hsl(184, 100%, 92%);
+    background-color: rgba(208, 251, 254, 0.712);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin: auto;
     gap: 50px;
     border-radius: 0 0 50px 50px;
   } 
+  &__flexDiv{
+    display: flex;
+    gap: 15px
+  }
+  @media (min-width: 800px) {
+  &__flexDiv{
+    gap: 40px;
+  }
+  }
   &__h1{
     @media (min-width: 800px) {
       padding-bottom: 5px;
@@ -261,6 +271,10 @@ main .main__column:last-child {
     cursor: pointer;
     @media (min-width: 800px) {
       color: black;
+      margin-left: -120px;
+    }
+    @media (min-width: 1200px) {
+      color: black;
     }
   }
   &__clear{
@@ -274,6 +288,7 @@ main .main__column:last-child {
     display: none;
     @media (min-width: 800px) {
       color: black;
+      
     }
   }
   &__add::before {
@@ -319,7 +334,7 @@ main .main__column:last-child {
   justify-content: space-between;
   width: 100%;
   min-height: 200px;
-  background-color: rgba(170, 170, 170, 0.8);
+  background-color: rgba(210, 210, 210, 0.987);
   border-radius: 10px !important;
   margin-top: 10px;
   @media (min-width: 800px) {
