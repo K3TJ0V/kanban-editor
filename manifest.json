@@ -1,7 +1,7 @@
 {
     "name": "Kanban editor",
     "short_name": "Kanban",
-    "start_url": "/kanban-editor/?home=true",
+    "start_url": "/kanban-editor",
     "icons": [
         {
             "src": "icons/manifest-icon-192.maskable.png",

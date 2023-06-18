@@ -29,7 +29,6 @@ const clear = document.querySelector(".main__clear--js");
 const Creator = document.querySelector(".main__creator");
 const creatorClose = document.querySelector(".close--js");
 const colInput = document.querySelector(".creator__input--js");
-const main = document.querySelector(".main");
 const columnHolder = document.querySelector('.columnHolder');
 const colSubmit = document.querySelector(".creator__submit--js");
 const textEditor = document.querySelector(".task__editor--text");
@@ -178,7 +177,7 @@ function createColumn(loadedColData) {
   })
 
   //constructing column
-  Column = new column(
+  let Column = new column(
     newColumn,
     colHeader,
     flexDiv,
