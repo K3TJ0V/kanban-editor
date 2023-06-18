@@ -3,10 +3,10 @@
   "type": "module",
   "version": "1.0.0",
   "description": "",
-  "source": "src/pages/index.html",
+  "source": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx parcel src/pages/index.html"
+    "start": "npx parcel src/index.html"
   },
   "author": "",
   "license": "ISC",
