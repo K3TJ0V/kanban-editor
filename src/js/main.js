@@ -273,7 +273,7 @@ function addTask1(dataContainer, loadedTaskData) {
     }
   });
 
-  Task = new task(newTask, taskDescription, moveButton, deleteButton, flexDiv, taskData);
+  let Task = new task(newTask, taskDescription, moveButton, deleteButton, flexDiv, taskData);
   addTaskClasses(Task);
   taskContainer.push(Task.newTask);
   return Task;
