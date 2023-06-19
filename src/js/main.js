@@ -171,7 +171,7 @@ function createColumn(loadedColData) {
   })
 
   columnData.taskList.forEach((e) => {
-    newTask = addTask1(columnData.taskList, e);
+    let newTask = addTask1(columnData.taskList, e);
     taskArea.prepend(newTask.newTask);
     taskArea.prepend(addTask);
   })
